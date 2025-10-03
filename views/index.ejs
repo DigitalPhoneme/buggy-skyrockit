@@ -4,20 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Skyrockit</title>
 </head>
 
 <body>
-    <p><a href="vip-lounge">Get into the VIP Users Only Lounge!</a></p>
-    <% if (user) { %>
-        <h1>Welcome to the app, <%= user.username %>!</h1>
-        <p>
-            <a href="/auth/sign-out">Sign Out</a>
-        </p>
-        <% } else {%>
-            <h1>Welcome to the app, guest.</h1>
-            <p><a href="/auth/sign-up">Sign Up</a> or <a href="/auth/sign-in">Sign In</a></p>
-            <% } %>
+    <%- include('./partials/_navbar.ejs') %>
+    <h1>Skyrockit</h1>
+    <p>A job application tracker</p>
+    <a href="/auth/sign-up">Sign Up</a>
+    <a href="/auth/sign-in">Sign in</a>
 </body>
 
 </html>

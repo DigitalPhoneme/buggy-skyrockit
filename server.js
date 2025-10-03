@@ -7,6 +7,10 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 const morgan = require("morgan");
 const session = require("express-session")
+const isSignedIn = require('./middleware/is-signed-in.js')
+const passUserToView = require('./middleware/pass-user-to-view.js')
+
+const applicationsController = require('./controllers/applications.js')
 // Set the port from environment variable or default to 3000
 const port = process.env.PORT ? process.env.PORT : "3000";
 
@@ -31,20 +35,19 @@ app.use(
         saveUninitialized: true,
     })
 )
+app.use(passUserToView)
 app.use("/auth", authController)
-
+app.use(isSignedIn)
+app.use('/users/:userId/applications', applicationsController)
 
 //routes
 
 // GET "/"
 app.get("/", async(req, res) =>{
-    res.render("index.ejs", {user: req.session.user})
-})
-app.get("/vip-lounge", (req, res) => {
-    if (req.session.user){
-        res.send(`Welcome to the party ${req.session.user.username}!`)
-    } else {
-        res.send("Sorry, no guests allowed.")
+    if(req.session.user){
+        res.redirect(`/users/${req.session.user._id}/applications`)
+    }else{
+        res.render('index.ejs')
     }
 })
 
