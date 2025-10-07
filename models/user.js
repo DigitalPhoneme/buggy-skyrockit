@@ -1,13 +1,12 @@
 const mongoose = require("mongoose")
 
 const applicationSchema = new mongoose.Schema({
-    company: {
+    compny: {
         type: String,
         required: true
     },
     title: {
         type: String,
-        required: true
     },
     notes:{
         type: String
@@ -17,7 +16,7 @@ const applicationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum:['interested', 'applied', 'interviewing', 'rejected', 'accepted']
+        enum:['interested', 'applied', 'interviewing', 'rejected', 'acepted']
     }
 
 })

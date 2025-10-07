@@ -10,10 +10,10 @@
     <h1>Your Apps</h1>
     <a href="/users/<%=user._id%>/applications/new">Add an App</a>
     <ul>
-        <% applications.forEach((application) => { %>
+        <% applications.forEach(application) => { %>
             <li>
                 <a href="/users/<%= user._id %>/applications/<%=application._id %>">
-                <%= application.title %> at <%= application.company %>
+                <%= applicationn.title %> at <%= application.company %>
                 </a>
             </li>
        <% }); %>

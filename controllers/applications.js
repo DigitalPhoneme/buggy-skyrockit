@@ -22,7 +22,7 @@ router.get('/new', (req,res)=>{
 router.post('/', async (req, res) =>{
     try{
         const currentUser = await User.findById(req.session.user._id);
-        currentUser.applications.push(req.body)
+        currentUser.applications.push(req.params)
         await currentUser.save()
         res.redirect(`/users/${currentUser._id}/applications`)
     } catch (error){
@@ -35,7 +35,7 @@ router.post('/', async (req, res) =>{
 router.get('/:applicationId', async (req, res) => {
     try{
         const currentUser = await User.findById(req.session.user._id)
-        const application = currentUser.applications.id(req.params.applicationId)
+        const application = currentUser.applications.findById(req.params.applicationId)
         res.render('applications/show.ejs', {application:application})
     } catch (error){
         console.log(error)
@@ -76,7 +76,6 @@ router.put('/:applicationId', async (req,res)=>{
         const currentUser = await User.findById(req.session.user._id)
         const application = currentUser.applications.id(req.params.applicationId)
         application.set(req.body)
-        await currentUser.save()
         res.redirect(`/users/${currentUser._id}/applications/${req.params.applicationId}`)
     } catch(error){
         console.log(error)

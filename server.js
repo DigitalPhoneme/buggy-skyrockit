@@ -30,14 +30,13 @@ app.use(methodOverride("_method"));
 app.use(morgan('dev'));
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
+        secret: process.env.SESION_SECRET,
         resave: false,
         saveUninitialized: true,
     })
 )
 app.use(passUserToView)
 app.use("/auth", authController)
-app.use(isSignedIn)
 app.use('/users/:userId/applications', applicationsController)
 
 //routes
